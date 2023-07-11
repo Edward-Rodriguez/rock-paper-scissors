@@ -42,24 +42,30 @@ function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.trim().toUpperCase();
   computerSelection = computerSelection.trim().toUpperCase();
 
-  let isWinning; //flag denoting winning hand
+  let playerIsWinning; //flag denoting player winning hand
 
   if (playerSelection === computerSelection)
     return `It's a tie, computer also chose ${computerSelection}`;
 
   switch (playerSelection) {
     case ROCK:
-      computerSelection == SCISSORS ? (isWinning = true) : (isWinning = false);
+      computerSelection == SCISSORS
+        ? (playerIsWinning = true)
+        : (playerIsWinning = false);
       break;
     case PAPER:
-      computerSelection == ROCK ? (isWinning = true) : (isWinning = false);
+      computerSelection == ROCK
+        ? (playerIsWinning = true)
+        : (playerIsWinning = false);
       break;
     case SCISSORS:
-      computerSelection == PAPER ? (isWinning = true) : (isWinning = false);
+      computerSelection == PAPER
+        ? (playerIsWinning = true)
+        : (playerIsWinning = false);
       break;
   }
 
-  return isWinning
+  return playerIsWinning
     ? `You Win! ${playerSelection} beats ${computerSelection}`
     : `You Lose! ${computerSelection} beats ${playerSelection}`;
 }
@@ -68,3 +74,10 @@ function playRound(playerSelection, computerSelection) {
 const playerSelection = "rock";
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
+
+/**
+ * pseudo:
+ * function game(numOfRounds)
+ *  loop through the numOfRounds
+ *    playRound(playerSelection, computerSelection)
+ */
