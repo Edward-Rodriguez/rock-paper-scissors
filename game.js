@@ -45,7 +45,10 @@ function playRound(playerSelection, computerSelection) {
   let playerIsWinning; //flag denoting player winning hand
 
   if (playerSelection === computerSelection)
-    return `It's a tie, computer also chose ${computerSelection}`;
+    return [
+      playerIsWinning,
+      `It's a tie, computer also chose ${computerSelection}`,
+    ];
 
   switch (playerSelection) {
     case ROCK:
@@ -65,15 +68,22 @@ function playRound(playerSelection, computerSelection) {
       break;
   }
 
-  return playerIsWinning
-    ? `You Win! ${playerSelection} beats ${computerSelection}`
-    : `You Lose! ${computerSelection} beats ${playerSelection}`;
+  return [
+    playerIsWinning,
+    playerIsWinning
+      ? `You Win! ${playerSelection} beats ${computerSelection}`
+      : `You Lose! ${computerSelection} beats ${playerSelection}`,
+  ];
 }
 
 // test
 const playerSelection = "rock";
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
+console.log(playRound(playerSelection, computerSelection));
+playRound(playerSelection, computerSelection)[0]
+  ? console.log("Winning!")
+  : console.log("Losing!");
 
 /**
  * pseudo:
