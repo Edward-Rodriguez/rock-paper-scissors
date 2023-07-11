@@ -102,12 +102,13 @@ playRound(playerSelection, computerSelection)[0]
  *    else if playerScore > computerScore ? console log you won :
  *    else console log you lose
  */
-function game(totalNumOfRounds) {
+function game(totalNumOfRounds = 5) {
   let playerScore = 0;
   let computerScore = 0;
 
   for (let round = 0; round < totalNumOfRounds; round++) {
     let playerSelection = getUserInput();
+
     let computerSelection = getComputerChoice();
     let resultOfRound = playRound(playerSelection, computerSelection);
     console.log(`Round ${round}: ${resultOfRound[1]}`);
@@ -123,12 +124,26 @@ function game(totalNumOfRounds) {
     console.log("Congrats you have won the game!");
   else console.log("You have lost!");
   console.log(
-    `Final Score was player: ${playerScore} and computer:${computerScore}`
+    `Final Score is player: ${playerScore} and computer:${computerScore}`
   );
 }
 
 function getUserInput() {
-  return prompt("Make your choice: Rock, Paper or Scisscors");
+  let playerChoice = prompt("Make your choice: Rock, Paper or Scisscors");
+  let isValid = validateUserInput(playerChoice);
+  while (!isValid) {
+    playerChoice = prompt(
+      "Incorrect input, Please choose only one of the following: Rock, Paper or Scisscors"
+    );
+    isValid = validateUserInput(playerChoice);
+  }
+  return playerChoice;
+}
+
+function validateUserInput(input) {
+  input = input.trim().toUpperCase();
+  if (input === ROCK || input == PAPER || input === SCISSORS) return true;
+  else return false;
 }
 
 game(5);
