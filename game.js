@@ -11,4 +11,60 @@ function getComputerChoice() {
   let randomNumber = Math.floor(Math.random() * 3);
   return choices[randomNumber];
 }
-console.log(getComputerChoice());
+//console.log(getComputerChoice());
+
+/**
+ * pseudo:
+ * function playRound(playerSelection, computerSelection)
+ *  if both parameters match(lowercase) return "It's a tie, computer also chose .."
+ *  create boolean variable isWinning
+ *  switch playerSelection
+ *    case rock
+ *      computerSelection == paper ? isWinning = false :
+ *        computerSelection == scissors ? isWinning = true :
+ *        break
+ *    case paper
+ *      computerSelection == rock ? isWinning = true :
+ *        computerSelection == scissors ? isWinning = false :
+ *        break
+ *    case scissors
+ *      computerSelection == rock ? isWinning = false :
+ *        computerSelection == paper ? isWinning = true :
+ *        break
+ *
+ *  return
+ *    isWinning ? 'You Win! playerSelection beats computerSelection' :
+ *      'You Lose! computerSelection beats playerSelection
+ */
+const [ROCK, PAPER, SCISSORS] = ["ROCK", "PAPER", "SCISSORS"];
+
+function playRound(playerSelection, computerSelection) {
+  playerSelection = playerSelection.trim().toUpperCase();
+  computerSelection = computerSelection.trim().toUpperCase();
+
+  let isWinning; //flag denoting winning hand
+
+  if (playerSelection === computerSelection)
+    return `It's a tie, computer also chose ${computerSelection}`;
+
+  switch (playerSelection) {
+    case ROCK:
+      computerSelection == SCISSORS ? (isWinning = true) : (isWinning = false);
+      break;
+    case PAPER:
+      computerSelection == ROCK ? (isWinning = true) : (isWinning = false);
+      break;
+    case SCISSORS:
+      computerSelection == PAPER ? (isWinning = true) : (isWinning = false);
+      break;
+  }
+
+  return isWinning
+    ? `You Win! ${playerSelection} beats ${computerSelection}`
+    : `You Lose! ${computerSelection} beats ${playerSelection}`;
+}
+
+// test
+const playerSelection = "rock";
+const computerSelection = getComputerChoice();
+console.log(playRound(playerSelection, computerSelection));
