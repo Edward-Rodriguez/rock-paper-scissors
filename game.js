@@ -88,6 +88,47 @@ playRound(playerSelection, computerSelection)[0]
 /**
  * pseudo:
  * function game(numOfRounds)
+ *  create playerScore variable
+ *  create computerScore variable
+ *  initialize both variables to zero
  *  loop through the numOfRounds
- *    playRound(playerSelection, computerSelection)
+ *    create temp variable roundResult
+ *    initialize value to: playRound(playerSelection, computerSelection)
+ *    log results to console roundResult[1]
+ *    if roundResult[0] is not undefined
+ *      if roundResult[0] is true, increment playerScore by 1
+ *      else increment computerScore by 1
+ *  if playerScore == computerScore ? console log game is tied:
+ *    else if playerScore > computerScore ? console log you won :
+ *    else console log you lose
  */
+function game(totalNumOfRounds) {
+  let playerScore = 0;
+  let computerScore = 0;
+
+  for (let round = 0; round < totalNumOfRounds; round++) {
+    let playerSelection = getUserInput();
+    let computerSelection = getComputerChoice();
+    let resultOfRound = playRound(playerSelection, computerSelection);
+    console.log(`Round ${round}: ${resultOfRound[1]}`);
+    //index 0 contains boolean value of round result (player perspective)
+    if (resultOfRound[0] != undefined) {
+      if (resultOfRound[0] == true) playerScore += 1;
+      else computerScore += 1;
+    }
+  }
+
+  if (playerScore === computerScore) console.log("No winner, game is tied");
+  else if (playerScore > computerScore)
+    console.log("Congrats you have won the game!");
+  else console.log("You have lost!");
+  console.log(
+    `Final Score was player: ${playerScore} and computer:${computerScore}`
+  );
+}
+
+function getUserInput() {
+  return prompt("Make your choice: Rock, Paper or Scisscors");
+}
+
+game(5);
