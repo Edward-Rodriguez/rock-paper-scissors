@@ -129,14 +129,13 @@ function game(totalNumOfRounds = 5) {
 }
 
 function getUserInput() {
-  let playerChoice = prompt("Make your choice: Rock, Paper or Scisscors");
-  let isValid = validateUserInput(playerChoice);
-  while (!isValid) {
-    playerChoice = prompt(
-      "Incorrect input, Please choose only one of the following: Rock, Paper or Scisscors"
-    );
-    isValid = validateUserInput(playerChoice);
-  }
+  let playerChoice;
+  let isValidUserInput;
+  do {
+    playerChoice = prompt("Make your choice: Rock, Paper or Scisscors");
+    isValidUserInput = validateUserInput(playerChoice);
+  } while (!isValidUserInput);
+  console.log("player chose:", playerChoice, typeof playerChoice);
   return playerChoice;
 }
 
