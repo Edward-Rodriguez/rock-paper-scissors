@@ -108,13 +108,13 @@ function game(totalNumOfRounds = 5) {
 
   for (let round = 0; round < totalNumOfRounds; round++) {
     let playerSelection = getUserInput();
-
     let computerSelection = getComputerChoice();
-    let resultOfRound = playRound(playerSelection, computerSelection);
-    console.log(`Round ${round}: ${resultOfRound[1]}`);
+
+    let playerWon = playRound(playerSelection, computerSelection);
+    console.log(`Round ${round}: ${playerWon[1]}`);
     //index 0 contains boolean value of round result (player perspective)
-    if (resultOfRound[0] != undefined) {
-      if (resultOfRound[0] == true) playerScore += 1;
+    if (playerWon[0] != undefined) {
+      if (playerWon[0] == true) playerScore += 1;
       else computerScore += 1;
     }
   }
@@ -135,7 +135,7 @@ function getUserInput() {
     playerChoice = prompt("Make your choice: Rock, Paper or Scisscors");
     isValidUserInput = validateUserInput(playerChoice);
   } while (!isValidUserInput);
-  console.log("player chose:", playerChoice, typeof playerChoice);
+  // console.log("player chose:", playerChoice, typeof playerChoice);
   return playerChoice;
 }
 
