@@ -145,15 +145,17 @@ function validateUserInput(input) {
   else return false;
 }
 
+const resultsContainer = document.querySelector("#resultsContainer");
+const p = document.createElement("p");
+
 // game(5);
-const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
-  // button.addEventListener('click', playRound(e.target.value))
-  button.addEventListener("click", (e) => {
-    let playerChoice = e.target.value;
+const choicesImages = document.querySelectorAll("img");
+choicesImages.forEach((choice) => {
+  // choice.addEventListener('click', playRound(e.target.value))
+  choice.addEventListener("click", (e) => {
+    // console.log(e);
+    let playerChoice = e.target.name;
     let computerChoice = getComputerChoice();
-    const resultsContainer = document.querySelector("#resultsContainer");
-    const p = document.createElement("p");
     p.textContent = playRound(playerChoice, computerChoice)[1];
     resultsContainer.appendChild(p);
   });

@@ -5,12 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <script src="game.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h2>Rock Paper Scissors</h2>
-    <button value="Rock">Rock</button>
-    <button value="Paper">Paper</button>
-    <button value="Scissors">Scissors</button>
-    <div id="resultsContainer"></div>
+    <div class="page-container">
+      <h2>Rock Paper Scissors</h2>
+      <div class="score-container">
+        <div class="score">
+          <p>You</p>
+          <span class="score-count">00</span>
+        </div>
+        <div>
+          <div class="score">
+            <p>Computer</p>
+            <span class="score-count">00</span>
+          </div>
+        </div>
+      </div>
+      <div class="choices-group">
+        <div class="rock group">
+          <img
+            src="img/icons8-hand-rock-96.png"
+            name="Rock"
+            alt="hand in the shape of a fist representing a rock" />
+          <label>Rock</label>
+        </div>
+        <div class="paper group">
+          <img
+            src="img/icons8-hand-96.png"
+            name="Paper"
+            alt="open hand with thumb on the left representing paper" />
+          <label>Paper</label>
+        </div>
+        <div class="scissors group">
+          <img
+            src="img/icons8-hand-scissors-96.png"
+            name="Scissors"
+            alt="hand in the shape of scissors" />
+          <label>Scissors</label>
+        </div>
+      </div>
+      <div id="resultsContainer"></div>
+    </div>
   </body>
 </html>

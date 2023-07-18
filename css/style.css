@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Tektur&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.score-container .score {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score > p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.score-count {
+  font-family: "Tektur", cursive;
+  /* font-family: "VT323", monospace; */
+  font-size: 128px;
+}
+
+.choices-group {
+  display: flex;
+  gap: 2rem;
+  text-align: center;
+}
+
+.choices-group .group {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.group:hover {
+  transform: scale(1.1);
+  font-weight: 800;
+}
+
+#resultsContainer {
+  font-family: "Tektur", cursive;
+  font-size: 1.2rem;
+}
