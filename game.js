@@ -76,14 +76,14 @@ function playRound(playerSelection, computerSelection) {
   ];
 }
 
-// test
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
-console.log(playRound(playerSelection, computerSelection));
-playRound(playerSelection, computerSelection)[0]
-  ? console.log("Winning!")
-  : console.log("Losing!");
+// // test
+// const playerSelection = "rock";
+// const computerSelection = getComputerChoice();
+// console.log(playRound(playerSelection, computerSelection));
+// console.log(playRound(playerSelection, computerSelection));
+// playRound(playerSelection, computerSelection)[0]
+//   ? console.log("Winning!")
+//   : console.log("Losing!");
 
 /**
  * pseudo:
@@ -145,4 +145,16 @@ function validateUserInput(input) {
   else return false;
 }
 
-game(5);
+// game(5);
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  // button.addEventListener('click', playRound(e.target.value))
+  button.addEventListener("click", (e) => {
+    let playerChoice = e.target.value;
+    let computerChoice = getComputerChoice();
+    const resultsContainer = document.querySelector("#resultsContainer");
+    const p = document.createElement("p");
+    p.textContent = playRound(playerChoice, computerChoice)[1];
+    resultsContainer.appendChild(p);
+  });
+});
