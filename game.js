@@ -6,6 +6,8 @@
  *  return the random num index of the choices array
  */
 const choices = ["Rock", "Paper", "Scissors"];
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
   let randomNumber = Math.floor(Math.random() * 3);
@@ -42,35 +44,40 @@ function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.trim().toUpperCase();
   computerSelection = computerSelection.trim().toUpperCase();
 
-  let playerIsWinning; //flag denoting player winning hand
+  let playerHasWon; //flag denoting player winning hand
 
   if (playerSelection === computerSelection)
     return [
-      playerIsWinning,
+      playerHasWon,
       `It's a tie, computer also chose ${computerSelection}`,
     ];
 
   switch (playerSelection) {
     case ROCK:
       computerSelection == SCISSORS
-        ? (playerIsWinning = true)
-        : (playerIsWinning = false);
+        ? (playerHasWon = true)
+        : (playerHasWon = false);
       break;
     case PAPER:
       computerSelection == ROCK
-        ? (playerIsWinning = true)
-        : (playerIsWinning = false);
+        ? (playerHasWon = true)
+        : (playerHasWon = false);
       break;
     case SCISSORS:
       computerSelection == PAPER
-        ? (playerIsWinning = true)
-        : (playerIsWinning = false);
+        ? (playerHasWon = true)
+        : (playerHasWon = false);
       break;
   }
 
+  if (playerHasWon !== undefined) {
+    if (playerHasWon) playerScore += 1;
+    else computerScore += 1;
+  }
+
   return [
-    playerIsWinning,
-    playerIsWinning
+    playerHasWon,
+    playerHasWon
       ? `You Win! ${playerSelection} beats ${computerSelection}`
       : `You Lose! ${computerSelection} beats ${playerSelection}`,
   ];
@@ -151,9 +158,7 @@ const p = document.createElement("p");
 // game(5);
 const choicesImages = document.querySelectorAll("img");
 choicesImages.forEach((choice) => {
-  // choice.addEventListener('click', playRound(e.target.value))
   choice.addEventListener("click", (e) => {
-    // console.log(e);
     let playerChoice = e.target.name;
     let computerChoice = getComputerChoice();
     p.textContent = playRound(playerChoice, computerChoice)[1];
