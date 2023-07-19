@@ -163,5 +163,35 @@ choicesImages.forEach((choice) => {
     let computerChoice = getComputerChoice();
     p.textContent = playRound(playerChoice, computerChoice)[1];
     resultsContainer.appendChild(p);
+    updateUIScoreCount();
   });
 });
+
+/**
+ * problem:
+ * update score count on page after a playerROund
+ * pseudo:
+ * function updateUIScoreCount(playerHasWon)
+ *  playerSpan = queryselector(player, socre-count)
+ *  playerSpan.textContent = playerScore.toLocaleString('en-US,{minimumIntegerDigits: 2, useGrouping:false})
+ *  computerSpan = queryselector(computer, socre-count)
+ *  computerSpan.textContent = computerScore.toLocaleString('en-US,{minimumIntegerDigits: 2, useGrouping:false})
+ *
+ *  TODO: add styling to score of winner
+ *  if playerHasWon, winner = "player" else "computer" aka class names
+ *  winner_element = queryselector(winner, acore-count)
+ *  winner_element.textContent =
+ */
+function updateUIScoreCount() {
+  const playerSpan = document.querySelector(".player.score-count");
+  playerSpan.textContent = playerScore.toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+
+  const computerSpan = document.querySelector(".computer.score-count");
+  computerSpan.textContent = computerScore.toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+}
