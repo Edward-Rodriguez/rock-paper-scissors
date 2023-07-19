@@ -8,6 +8,9 @@
 const choices = ["Rock", "Paper", "Scissors"];
 let playerScore = 0;
 let computerScore = 0;
+let roundNumber = 0;
+const numberOfGamesToWin = 5;
+let = 0;
 
 function getComputerChoice() {
   let randomNumber = Math.floor(Math.random() * 3);
@@ -43,13 +46,14 @@ const [ROCK, PAPER, SCISSORS] = ["ROCK", "PAPER", "SCISSORS"];
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.trim().toUpperCase();
   computerSelection = computerSelection.trim().toUpperCase();
+  roundNumber += 1;
 
   let playerHasWon; //flag denoting player winning hand
 
   if (playerSelection === computerSelection)
     return [
       playerHasWon,
-      `It's a tie, computer also chose ${computerSelection}`,
+      `Round ${roundNumber}: It's a tie, computer also chose ${computerSelection}`,
     ];
 
   switch (playerSelection) {
@@ -78,8 +82,8 @@ function playRound(playerSelection, computerSelection) {
   return [
     playerHasWon,
     playerHasWon
-      ? `You Win! ${playerSelection} beats ${computerSelection}`
-      : `You Lose! ${computerSelection} beats ${playerSelection}`,
+      ? `Round ${roundNumber}: You Win! ${playerSelection} beats ${computerSelection}`
+      : `Round ${roundNumber}:You Lose! ${computerSelection} beats ${playerSelection}`,
   ];
 }
 
@@ -164,6 +168,7 @@ choicesImages.forEach((choice) => {
     p.textContent = playRound(playerChoice, computerChoice)[1];
     resultsContainer.appendChild(p);
     updateUIScoreCount();
+    checkWinner();
   });
 });
 
@@ -194,4 +199,26 @@ function updateUIScoreCount() {
     minimumIntegerDigits: 2,
     useGrouping: false,
   });
+}
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  roundNumber = 0;
+}
+
+function checkWinner() {
+  if (playerScore === 5 || computerScore === 5) {
+    const gameWinnerDiv = document.createElement("div");
+    gameWinnerDiv.classList.add("game-result");
+    if (playerScore == 5) {
+      gameWinnerDiv.classList.add("winner");
+      gameWinnerDiv.textContent = "You Win!";
+    } else {
+      gameWinnerDiv.classList.add("loser");
+      gameWinnerDiv.textContent = "You Lose!";
+    }
+    resultsContainer.appendChild(gameWinnerDiv);
+    return true;
+  } else return false;
 }

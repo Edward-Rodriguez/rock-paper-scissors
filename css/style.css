@@ -1,7 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Tektur&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Press+Start+2P&family=Tektur&display=swap");
 
 html {
   box-sizing: border-box;
+  height: 100vh;
 }
 
 *,
@@ -22,20 +23,28 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .score-container .score {
-  flex: 1;
+  flex: 1 0 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.player.score {
+  color: rgb(64, 127, 127);
+}
+
+.computer.score {
+  color: rgb(212, 106, 106);
+}
+
 .score > p {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -65,4 +74,18 @@ html {
 #resultsContainer {
   font-family: "Tektur", cursive;
   font-size: 1.2rem;
+  text-align: center;
+}
+
+.game-result {
+  font-family: "Press Start 2P", cursive;
+  font-size: 2rem;
+}
+
+.winner {
+  color: green;
+}
+
+.loser {
+  color: red;
 }
