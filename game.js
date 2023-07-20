@@ -137,9 +137,9 @@ function toggleUserInputVisability() {
 }
 
 function togglePlayAgainButton() {
-  if ((playAgainButton.style.display = "none")) {
-    playAgainButton.style.display = "block";
-  } else playAgainButton.style.display = "none";
+  if (playAgainButton.style.display === "block") {
+    playAgainButton.style.display = "none";
+  } else playAgainButton.style.display = "block";
 }
 
 /**
@@ -189,7 +189,6 @@ function resetGame() {
   roundNumber = 0;
   gameIsOver = false;
   resultsContainer.childNodes.forEach((childElement) => {
-    console.log(childElement);
     resultsContainer.remove(childElement);
   });
   toggleUserInputVisability();
