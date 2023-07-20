@@ -125,12 +125,15 @@ function handlePlayerChoiceClick(e) {
 }
 
 function toggleUserInputVisability() {
-  if (gameIsOver) {
-    playerChoiceGroupDiv.forEach((group) => {
+  playerChoiceGroupDiv.forEach((group) => {
+    if (gameIsOver) {
       group.classList.add("disable-click");
       group.classList.remove("hover");
-    });
-  }
+    } else {
+      group.classList.remove("disable-click");
+      group.classList.add("hover");
+    }
+  });
 }
 
 function togglePlayAgainButton() {
