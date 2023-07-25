@@ -34,6 +34,13 @@ html {
   align-items: center;
 }
 
+#description {
+  font-family: "Tektur", cursive;
+  /* font-family: "VT323", monospace; */
+  font-size: 1rem;
+  margin-top: -1.3rem;
+}
+
 .player.score {
   color: rgb(64, 127, 127);
 }

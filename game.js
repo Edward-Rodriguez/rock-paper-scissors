@@ -57,7 +57,7 @@ function playRound(playerSelection, computerSelection) {
     playerHasWon,
     playerHasWon
       ? `Round ${roundNumber}: You Win! ${playerSelection} beats ${computerSelection}`
-      : `Round ${roundNumber}:You Lose! ${computerSelection} beats ${playerSelection}`,
+      : `Round ${roundNumber}: You Lose! ${computerSelection} beats ${playerSelection}`,
   ];
 }
 
@@ -110,6 +110,9 @@ const resultsContainer = document.querySelector("#resultsContainer");
 const roundResultContainer = document.createElement("p");
 const playerChoiceGroupDiv = document.querySelectorAll(".group");
 const playAgainButton = document.getElementById("play-again-btn");
+const gameWinnerDiv = document.createElement("div");
+resultsContainer.appendChild(roundResultContainer);
+resultsContainer.appendChild(gameWinnerDiv);
 
 playerChoiceGroupDiv.forEach((choice) => {
   choice.addEventListener("click", (e) => handlePlayerChoiceClick(e));
@@ -119,7 +122,6 @@ function handlePlayerChoiceClick(e) {
   let playerChoice = e.target.name;
   let computerChoice = getComputerChoice();
   roundResultContainer.textContent = playRound(playerChoice, computerChoice)[1];
-  resultsContainer.appendChild(roundResultContainer);
   updateUIScoreCount();
   checkWinner();
 }
@@ -165,7 +167,6 @@ function updateUIScoreCount() {
 function checkWinner() {
   if (playerScore === 5 || computerScore === 5) {
     gameIsOver = true;
-    const gameWinnerDiv = document.createElement("div");
     gameWinnerDiv.classList.add("game-result");
     if (playerScore == 5) {
       gameWinnerDiv.classList.add("winner");
@@ -174,7 +175,6 @@ function checkWinner() {
       gameWinnerDiv.classList.add("loser");
       gameWinnerDiv.textContent = "Game Over!";
     }
-    resultsContainer.appendChild(gameWinnerDiv);
     toggleUserInputVisability();
     togglePlayAgainButton();
     return true;
@@ -189,7 +189,7 @@ function resetGame() {
   roundNumber = 0;
   gameIsOver = false;
   resultsContainer.childNodes.forEach((childElement) => {
-    resultsContainer.remove(childElement);
+    childElement.textContent = "";
   });
   toggleUserInputVisability();
   togglePlayAgainButton();
