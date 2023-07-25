@@ -131,6 +131,7 @@ function resetGame() {
   gameIsOver = false;
   resultsContainer.childNodes.forEach((childElement) => {
     childElement.textContent = "";
+    childElement.classList.remove("winner", "loser");
   });
   toggleUserInputVisability();
   togglePlayAgainButton();
