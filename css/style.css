@@ -33,12 +33,15 @@ html {
   justify-content: center;
   align-items: center;
 }
+#title {
+  font-size: 3rem;
+  margin: 0;
+}
 
 #description {
   font-family: "Tektur", cursive;
-  /* font-family: "VT323", monospace; */
   font-size: 1rem;
-  margin-top: -1.3rem;
+  margin-top: 0;
 }
 
 .player.score {

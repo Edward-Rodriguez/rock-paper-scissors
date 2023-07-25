@@ -1,21 +1,14 @@
-/**
- */
-const choices = ["Rock", "Paper", "Scissors"];
-let playerScore = 4;
+const numberOfGamesToWin = 5;
+const [ROCK, PAPER, SCISSORS] = ["ROCK", "PAPER", "SCISSORS"];
+let playerScore = 0;
 let computerScore = 0;
 let roundNumber = 0;
-const numberOfGamesToWin = 5;
 let gameIsOver = false;
-let = 0;
 
 function getComputerChoice() {
   let randomNumber = Math.floor(Math.random() * 3);
-  return choices[randomNumber];
+  return [ROCK, PAPER, SCISSORS][randomNumber];
 }
-
-/**
- */
-const [ROCK, PAPER, SCISSORS] = ["ROCK", "PAPER", "SCISSORS"];
 
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.trim().toUpperCase();
@@ -61,51 +54,6 @@ function playRound(playerSelection, computerSelection) {
   ];
 }
 
-/**
- * function to play n rounds and log results
- */
-function game(totalNumOfRounds = 5) {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  for (let round = 0; round < totalNumOfRounds; round++) {
-    let playerSelection = getUserInput();
-    let computerSelection = getComputerChoice();
-
-    let playerWon = playRound(playerSelection, computerSelection);
-    console.log(`Round ${round}: ${playerWon[1]}`);
-    //index 0 contains boolean value of round result (player perspective)
-    if (playerWon[0] != undefined) {
-      if (playerWon[0] == true) playerScore += 1;
-      else computerScore += 1;
-    }
-  }
-
-  if (playerScore === computerScore) console.log("No winner, game is tied");
-  else if (playerScore > computerScore)
-    console.log("Congrats you have won the game!");
-  else console.log("You have lost!");
-  console.log(
-    `Final Score is player: ${playerScore} and computer:${computerScore}`
-  );
-}
-
-function getUserInput() {
-  let playerChoice;
-  let isValidUserInput;
-  do {
-    playerChoice = prompt("Make your choice: Rock, Paper or Scisscors");
-    isValidUserInput = validateUserInput(playerChoice);
-  } while (!isValidUserInput);
-  return playerChoice;
-}
-
-function validateUserInput(input) {
-  input = input.trim().toUpperCase();
-  if (input === ROCK || input == PAPER || input === SCISSORS) return true;
-  else return false;
-}
-
 const resultsContainer = document.querySelector("#resultsContainer");
 const roundResultContainer = document.createElement("p");
 const playerChoiceGroupDiv = document.querySelectorAll(".group");
@@ -113,10 +61,6 @@ const playAgainButton = document.getElementById("play-again-btn");
 const gameWinnerDiv = document.createElement("div");
 resultsContainer.appendChild(roundResultContainer);
 resultsContainer.appendChild(gameWinnerDiv);
-
-playerChoiceGroupDiv.forEach((choice) => {
-  choice.addEventListener("click", (e) => handlePlayerChoiceClick(e));
-});
 
 function handlePlayerChoiceClick(e) {
   let playerChoice = e.target.name;
@@ -126,31 +70,10 @@ function handlePlayerChoiceClick(e) {
   checkWinner();
 }
 
-function toggleUserInputVisability() {
-  playerChoiceGroupDiv.forEach((group) => {
-    if (gameIsOver) {
-      group.classList.add("disable-click");
-      group.classList.remove("hover");
-    } else {
-      group.classList.remove("disable-click");
-      group.classList.add("hover");
-    }
-  });
-}
+playerChoiceGroupDiv.forEach((choice) => {
+  choice.addEventListener("click", (e) => handlePlayerChoiceClick(e));
+});
 
-function togglePlayAgainButton() {
-  if (playAgainButton.style.display === "block") {
-    playAgainButton.style.display = "none";
-  } else playAgainButton.style.display = "block";
-}
-
-/**
- *
- *  TODO: add styling to score of winner
- *  if playerHasWon, winner = "player" else "computer" aka class names
- *  winner_element = queryselector(winner, acore-count)
- *  winner_element.textContent =
- */
 function updateUIScoreCount() {
   const playerSpan = document.querySelector(".player.score-count");
   playerSpan.textContent = playerScore.toLocaleString("en-US", {
@@ -179,6 +102,24 @@ function checkWinner() {
     togglePlayAgainButton();
     return true;
   } else return false;
+}
+
+function toggleUserInputVisability() {
+  playerChoiceGroupDiv.forEach((group) => {
+    if (gameIsOver) {
+      group.classList.add("disable-click");
+      group.classList.remove("hover");
+    } else {
+      group.classList.remove("disable-click");
+      group.classList.add("hover");
+    }
+  });
+}
+
+function togglePlayAgainButton() {
+  if (playAgainButton.style.display === "block") {
+    playAgainButton.style.display = "none";
+  } else playAgainButton.style.display = "block";
 }
 
 playAgainButton.addEventListener("click", resetGame);
