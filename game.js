@@ -5,6 +5,20 @@ let computerScore = 0;
 let roundNumber = 0;
 let gameIsOver = false;
 
+const images = {
+  player: {
+    [ROCK]: "img/icons8-hand-rock-96-player.png",
+    [PAPER]: "img/icons8-hand-96-player.png",
+    [SCISSORS]: "img/icons8-hand-scissors-player.png",
+  },
+  computer: {
+    [ROCK]: "img/icons8-hand-rock-96-computer.png",
+    [PAPER]: "img/icons8-hand-96-computer.png",
+    [SCISSORS]: "img/icons8-hand-scissors-computer.png",
+  },
+  unknown: "img/question-mark.png",
+};
+
 function getComputerChoice() {
   let randomNumber = Math.floor(Math.random() * 3);
   return [ROCK, PAPER, SCISSORS][randomNumber];
@@ -59,6 +73,8 @@ const roundResultContainer = document.createElement("p");
 const playerChoiceGroupDiv = document.querySelectorAll(".group");
 const playAgainButton = document.getElementById("play-again-btn");
 const gameWinnerDiv = document.createElement("div");
+const playerChoiceImage = document.querySelector(".player-choice > img");
+const computerChoiceImage = document.querySelector(".computer-choice > img");
 resultsContainer.appendChild(roundResultContainer);
 resultsContainer.appendChild(gameWinnerDiv);
 
@@ -67,6 +83,7 @@ function handlePlayerChoiceClick(e) {
   let computerChoice = getComputerChoice();
   roundResultContainer.textContent = playRound(playerChoice, computerChoice)[1];
   updateUIScoreCount();
+  toggleImages(playerChoice, computerChoice);
   checkWinner();
 }
 
@@ -104,6 +121,16 @@ function checkWinner() {
   } else return false;
 }
 
+function toggleImages(playerChoice, computerChoice) {
+  if (gameIsOver) {
+    playerChoiceImage.setAttribute("src", images.unknown);
+    computerChoiceImage.setAttribute("src", images.unknown);
+  } else {
+    playerChoiceImage.setAttribute("src", images.player[playerChoice]);
+    computerChoiceImage.setAttribute("src", images.computer[computerChoice]);
+  }
+}
+
 function toggleUserInputVisability() {
   playerChoiceGroupDiv.forEach((group) => {
     if (gameIsOver) {
@@ -125,6 +152,7 @@ function togglePlayAgainButton() {
 playAgainButton.addEventListener("click", resetGame);
 
 function resetGame() {
+  toggleImages();
   playerScore = 0;
   computerScore = 0;
   roundNumber = 0;
